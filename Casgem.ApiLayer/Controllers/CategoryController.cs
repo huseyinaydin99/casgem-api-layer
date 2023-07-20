@@ -17,7 +17,7 @@ namespace Casgem.ApiLayer.Controllers
             _categoryService = categoryService;
         }
 
-        // GET, POST, PUT, DELETE, PATCH
+        // GET, POST, PUT, DELETE, PATCH...
         [HttpGet]
         public IActionResult CategoryList()
         {
