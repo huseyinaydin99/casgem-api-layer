@@ -7,6 +7,7 @@ using MailKit.Net.Smtp;
 using MimeKit;
 */
 using Casgem.EntityLayer.Concrete;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace Casgem.ApiLayer.Controllers
 {
@@ -48,6 +49,7 @@ namespace Casgem.ApiLayer.Controllers
                 var result = await _userManager.CreateAsync(appUser, registerRequest.Password);
                 if (result.Succeeded)
                 {
+                    HttpContext.Session.SetString("username", registerRequest.Username);
                     //SendEmail(registerRequest, x);
 
                     //TempData["Username"] = appUser.UserName;

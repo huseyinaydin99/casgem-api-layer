@@ -19,45 +19,75 @@ namespace Casgem.ApiLayer.Controllers
         [HttpGet]
         public ActionResult ProductList() 
         {
-            var values = _productService.TGetList();
-            return Ok(values);
+            var user = HttpContext.Session.GetString("username");
+            if(user != null && user != "")
+            {
+                var values = _productService.TGetList();
+                return Ok(values);
+            }
+            return Unauthorized();
         }
 
         [HttpGet("{id}")]
         public ActionResult GetProduct(int id)
         {
-            var value = _productService.TGetById(id);
-            return Ok(value);
+            var user = HttpContext.Session.GetString("username");
+            if (user != null && user != "")
+            {
+                var value = _productService.TGetById(id);
+                return Ok(value);
+            }
+            return Unauthorized();
         }
 
         [HttpPost]
         public ActionResult ProductAdd(Product product)
         {
-            _productService.TInsert(product);
-            return Ok();
+            var user = HttpContext.Session.GetString("username");
+            if (user != null && user != "")
+            {
+                _productService.TInsert(product);
+                return Ok();
+            }
+            return Unauthorized();
         }
 
         [HttpDelete("{id}")]
         public ActionResult ProductDelete(int id)
         {
-            var value = _productService.TGetById(id);
-            _productService.TDelete(value);
-            return Ok();
+            var user = HttpContext.Session.GetString("username");
+            if (user != null && user != "")
+            {
+                var value = _productService.TGetById(id);
+                _productService.TDelete(value);
+                return Ok();
+            }
+            return Unauthorized();
         }
 
         [HttpPut]
         public ActionResult UpdateProduct(Product product)
         {
-            _productService.TUpdate(product);
-            return Ok();
+            var user = HttpContext.Session.GetString("username");
+            if (user != null && user != "")
+            {
+                _productService.TUpdate(product);
+                return Ok();
+            }
+            return Unauthorized();
         }
 
         [Route("ProductListWithCategory")]
         [HttpGet]
         public IActionResult ProductListWithCategories()
         {
-            var values = _productService.GetProductWithCategories();
-            return Ok(values);
+            var user = HttpContext.Session.GetString("username");
+            if (user != null && user != "")
+            {
+                var values = _productService.GetProductWithCategories();
+                return Ok(values);
+            }
+            return Unauthorized();
         }
     }
 }

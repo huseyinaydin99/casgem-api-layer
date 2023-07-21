@@ -21,37 +21,62 @@ namespace Casgem.ApiLayer.Controllers
         [HttpGet]
         public IActionResult CategoryList()
         {
-            var values = _categoryService.TGetList();
-            return Ok(values);
+            var user = HttpContext.Session.GetString("username");
+            if (user != null && user != "")
+            {
+                var values = _categoryService.TGetList();
+                return Ok(values);
+            }
+            return Unauthorized();
         }
 
         [HttpPost]
         public IActionResult AddCategory(Category category)
         {
-            _categoryService.TInsert(category);
-            return Ok();
+            var user = HttpContext.Session.GetString("username");
+            if (user != null && user != "")
+            {
+                _categoryService.TInsert(category);
+                return Ok();
+            }
+            return Unauthorized();
         }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteCategory(int id)
         {
-            var value = _categoryService.TGetById(id);
-            _categoryService.TDelete(value);
-            return Ok();
+            var user = HttpContext.Session.GetString("username");
+            if (user != null && user != "")
+            {
+                var value = _categoryService.TGetById(id);
+                _categoryService.TDelete(value);
+                return Ok();
+            }
+            return Unauthorized();
         }
 
         [HttpGet("{id}")]
         public IActionResult GetCategory(int id)
         {
-            var value = _categoryService.TGetById(id);
-            return Ok(value);
+            var user = HttpContext.Session.GetString("username");
+            if (user != null && user != "")
+            {
+                var value = _categoryService.TGetById(id);
+                return Ok(value);
+            }
+            return Unauthorized();
         }
 
         [HttpPut]
         public IActionResult UpdateCategory(Category category)
         {
-            _categoryService.TUpdate(category);
-            return Ok();
+            var user = HttpContext.Session.GetString("username");
+            if (user != null && user != "")
+            {
+                _categoryService.TUpdate(category);
+                return Ok();
+            }
+            return Unauthorized();
         }
 
         /*[HttpGet]

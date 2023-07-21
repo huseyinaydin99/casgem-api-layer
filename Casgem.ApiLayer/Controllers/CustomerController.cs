@@ -19,36 +19,61 @@ namespace Casgem.ApiLayer.Controllers
         [HttpGet]
         public IActionResult CustomerList()
         {
-            return Ok(_customerService.TGetList());
+            var user = HttpContext.Session.GetString("username");
+            if (user != null && user != "")
+            {
+                return Ok(_customerService.TGetList());
+            }
+            return Unauthorized();
         }
 
         [HttpPost]
         public IActionResult AddCustomer(Customer customer)
         {
-            _customerService.TInsert(customer);
-            return Ok();
+            var user = HttpContext.Session.GetString("username");
+            if (user != null && user != "")
+            {
+                _customerService.TInsert(customer);
+                return Ok();
+            }
+            return Unauthorized();
         }
 
         [HttpGet("{id}")]
         public IActionResult GetCustomer(int id)
         {
-            var value = _customerService.TGetById(id);
-            return Ok(value);
+            var user = HttpContext.Session.GetString("username");
+            if (user != null && user != "")
+            {
+                var value = _customerService.TGetById(id);
+                return Ok(value);
+            }
+            return Unauthorized();
         }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteCustomer(int id)
         {
-            var value = _customerService.TGetById(id);
-            _customerService.TDelete(value);
-            return Ok();
+            var user = HttpContext.Session.GetString("username");
+            if (user != null && user != "")
+            {
+                var value = _customerService.TGetById(id);
+                _customerService.TDelete(value);
+                return Ok();
+            }
+            return Unauthorized();
         }
 
         [HttpPut]
         public IActionResult UpdateCustomer(Customer customer)
         {
-            _customerService.TUpdate(customer);
-            return Ok();
+            var user = HttpContext.Session.GetString("username");
+            if (user != null && user != "")
+            {
+                _customerService.TUpdate(customer);
+                return Ok();
+            }
+            return Unauthorized();
         }
 
     }

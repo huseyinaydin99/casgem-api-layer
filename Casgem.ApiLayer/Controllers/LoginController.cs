@@ -22,6 +22,7 @@ namespace Casgem.ApiLayer.Controllers
             var result = await _signInManager.PasswordSignInAsync(request.Username, request.Password, true, false);
             if (result.Succeeded)
             {
+                HttpContext.Session.SetString("username", request.Username);
                 return Ok();
             }
             return Unauthorized();
