@@ -1,3 +1,4 @@
+using Casgem.ApiLayer.Models;
 using Casgem.BusinessLayer.Abstract;
 using Casgem.BusinessLayer.Concrete;
 using Casgem.DataAccessLayer.Abstract;
@@ -23,6 +24,7 @@ builder.Services.AddScoped<IProductService, ProductManager>();
 
 
 builder.Services.AddDbContext<Context>();
+builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddErrorDescriber<CustomIdentityValidator>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
