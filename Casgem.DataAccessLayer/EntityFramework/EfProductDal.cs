@@ -18,7 +18,7 @@ namespace Casgem.DataAccessLayer.EntityFramework
 
         }
 
-        public List<Product> GetProductWithCategories()
+        public async Task<List<Product>> GetProductWithCategories()
         {
             using var context = new Context();
             return context.Products.Include(x=>x.Category).ToList();

@@ -5,23 +5,35 @@ using Casgem.DataAccessLayer.Abstract;
 using Casgem.DataAccessLayer.Concrete;
 using Casgem.DataAccessLayer.EntityFramework;
 using Casgem.EntityLayer.Concrete;
+using EntityLayer.Settings.Abstract;
+using EntityLayer.Settings.Concrete;
+using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDistributedMemoryCache();
-
 builder.Services.AddSession(options =>
 {
-    // Set a short timeout for easy testing.
-    options.IdleTimeout = TimeSpan.FromSeconds(10);
-    options.Cookie.HttpOnly = true;
+    options.IdleTimeout = TimeSpan.FromMinutes(1);//You can set Time   
 });
+builder.Services.AddMvc();
+
+
+
+//builder.Services.AddS
+/*
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+    options.CheckConsentNeeded = context => false;
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+});*/
 
 // Add services to the container.
-builder.Services.AddControllersWithViews()
-    .AddNewtonsoftJson(options =>
-    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-);
+
+
+
 builder.Services.AddScoped<ICategoryDal, EfCategoryDal>();
 builder.Services.AddScoped<ICategoryService, CategoryManager>();
 
@@ -30,6 +42,20 @@ builder.Services.AddScoped<ICustomerService, CustomerManager>();
 
 builder.Services.AddScoped<IProductDal, EfProductDal>();
 builder.Services.AddScoped<IProductService, ProductManager>();
+
+builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
+builder.Services.AddSingleton<IDatabaseSettings>(sp =>
+{
+    return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
+});
+
+builder.Services.AddControllers();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Hüseyin Aydýn MongoDB Swagger Dashboard", Version = "v1" });
+});
+
 
 
 builder.Services.AddDbContext<Context>();
@@ -47,12 +73,20 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseExceptionHandler("/Home/Error");
 }
 
+app.UseStaticFiles();
 app.UseSession();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication(); //Kimlik doðrulamasý kullan
 app.UseAuthorization();
 
 app.MapControllers();

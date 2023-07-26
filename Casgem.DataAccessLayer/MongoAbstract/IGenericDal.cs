@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Casgem.DataAccessLayer.Abstract
+namespace Casgem.DataAccessLayer.MongoAbstract
 {
     public interface IGenericDal<T> where T: class, new()
     {

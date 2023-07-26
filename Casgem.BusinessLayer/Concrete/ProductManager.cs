@@ -18,9 +18,9 @@ namespace Casgem.BusinessLayer.Concrete
             _productDal = productDal;
         }
 
-        public List<Product> GetProductWithCategories()
+        public async Task<List<Product>> GetProductWithCategories()
         {
-            return _productDal.GetProductWithCategories();
+            return await _productDal.GetProductWithCategories();
         }
 
         public void TDelete(Product t)
@@ -47,5 +47,6 @@ namespace Casgem.BusinessLayer.Concrete
         {
             _productDal.Update(t);
         }
+
     }
 }

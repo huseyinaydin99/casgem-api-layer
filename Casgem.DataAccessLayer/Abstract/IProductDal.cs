@@ -9,6 +9,6 @@ namespace Casgem.DataAccessLayer.Abstract
 {
     public interface IProductDal : IGenericDal<Product>
     {
-        List<Product> GetProductWithCategories();
+        Task<List<Product>> GetProductWithCategories();
     }
 }

@@ -11,10 +11,12 @@ namespace Casgem.ApiLayer.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
+        //private ISession _session;
 
         public CategoryController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
+            //_session = session;
         }
 
         // GET, POST, PUT, DELETE, PATCH...
@@ -34,6 +36,7 @@ namespace Casgem.ApiLayer.Controllers
         public IActionResult AddCategory(Category category)
         {
             var user = HttpContext.Session.GetString("username");
+            //var user = _session.GetString("username");
             if (user != null && user != "")
             {
                 _categoryService.TInsert(category);
@@ -74,7 +77,7 @@ namespace Casgem.ApiLayer.Controllers
             if (user != null && user != "")
             {
                 _categoryService.TUpdate(category);
-                return Ok();
+                return Ok(category);
             }
             return Unauthorized();
         }

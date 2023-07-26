@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Casgem.BusinessLayer.Abstract
+namespace Casgem.DataAccessLayer.MongoAbstract
 {
-    public interface IProductService : IGenericService<Product>
+    public interface ICustomerDal : IGenericDal<Customer>
     {
-        public Task<List<Product>> GetProductWithCategories();
+
     }
 }

@@ -1,4 +1,7 @@
-﻿using Casgem.BusinessLayer.Abstract;
+﻿using AutoMapper;
+using Casgem.BusinessLayer.Abstract;
+using Casgem.BusinessLayer.MongoAbstract;
+using Casgem.DtoLayer.DTOs.ProductDTOs;
 using Casgem.EntityLayer.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,19 +13,25 @@ namespace Casgem.ApiLayer.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
+        private readonly IMongoProductService _mongoProductService;
+        private readonly IMapper _mapper;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, IMongoProductService mongoProductService, IMapper mapper)
         {
             _productService = productService;
+            _mongoProductService = mongoProductService;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public ActionResult ProductList() 
+        public ActionResult ProductList()
         {
             var user = HttpContext.Session.GetString("username");
-            if(user != null && user != "")
+            if (user != null && user != "")
             {
-                var values = _productService.TGetList();
+                /*var values = _productService.TGetList();
+                return Ok(values);*/
+                var values = _mongoProductService.GetList();
                 return Ok(values);
             }
             return Unauthorized();
@@ -34,8 +43,10 @@ namespace Casgem.ApiLayer.Controllers
             var user = HttpContext.Session.GetString("username");
             if (user != null && user != "")
             {
-                var value = _productService.TGetById(id);
-                return Ok(value);
+                /*var value = _productService.TGetById(id);
+                return Ok(value);*/
+                var values = _mongoProductService.GetById(id);
+                return Ok(values);
             }
             return Unauthorized();
         }
@@ -46,7 +57,8 @@ namespace Casgem.ApiLayer.Controllers
             var user = HttpContext.Session.GetString("username");
             if (user != null && user != "")
             {
-                _productService.TInsert(product);
+                var value = _mapper.Map<CreateProductDto>(product);
+                _mongoProductService.Insert(value);
                 return Ok();
             }
             return Unauthorized();
@@ -58,8 +70,9 @@ namespace Casgem.ApiLayer.Controllers
             var user = HttpContext.Session.GetString("username");
             if (user != null && user != "")
             {
-                var value = _productService.TGetById(id);
-                _productService.TDelete(value);
+                var value = _mongoProductService.GetById(id);
+                var dto = _mapper.Map<DeleteProductDto>(value);
+                _mongoProductService.Delete(dto);
                 return Ok();
             }
             return Unauthorized();
@@ -71,12 +84,12 @@ namespace Casgem.ApiLayer.Controllers
             var user = HttpContext.Session.GetString("username");
             if (user != null && user != "")
             {
-                _productService.TUpdate(product);
+                _mongoProductService.Update(_mapper.Map<UpdateProductDto>(product));
                 return Ok();
             }
             return Unauthorized();
         }
-
+        /*
         [Route("ProductListWithCategory")]
         [HttpGet]
         public IActionResult ProductListWithCategories()
@@ -84,10 +97,11 @@ namespace Casgem.ApiLayer.Controllers
             var user = HttpContext.Session.GetString("username");
             if (user != null && user != "")
             {
-                var values = _productService.GetProductWithCategories();
+                var values = _mongoProductService.GetProductWithCategories();
                 return Ok(values);
             }
             return Unauthorized();
         }
+        */
     }
 }

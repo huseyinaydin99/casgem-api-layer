@@ -7,7 +7,7 @@ using MailKit.Net.Smtp;
 using MimeKit;
 */
 using Casgem.EntityLayer.Concrete;
-using Org.BouncyCastle.Asn1.Ocsp;
+using Casgem.ApiLayer.Model;
 
 namespace Casgem.ApiLayer.Controllers
 {
@@ -29,7 +29,7 @@ namespace Casgem.ApiLayer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterRequest registerRequest)
+        public async Task<IActionResult> Index(RegisterViewModel model)
         {
             /* if (ModelState.IsValid)
              {*/
@@ -37,19 +37,19 @@ namespace Casgem.ApiLayer.Controllers
             int x = rnd.Next(100000, 1000000);
             AppUser appUser = new AppUser()
             {
-                Name = registerRequest.Name,
-                Email = registerRequest.Email,
-                Surname = registerRequest.Surname,
-                UserName = registerRequest.Username,
-                City = registerRequest.City,
+                Name = model.Name,
+                Email = model.Email,
+                Surname = model.Surname,
+                UserName = model.UserName,
+                City = model.City,
                 ConfirmCode = x
             };
-            if (registerRequest.Password == registerRequest.ConfirmPassword)
+            if (model.Password == model.ConfirmPassword)
             {
-                var result = await _userManager.CreateAsync(appUser, registerRequest.Password);
+                var result = await _userManager.CreateAsync(appUser, model.Password);
                 if (result.Succeeded)
                 {
-                    HttpContext.Session.SetString("username", registerRequest.Username);
+                    HttpContext.Session.SetString("username", model.UserName);
                     //SendEmail(registerRequest, x);
 
                     //TempData["Username"] = appUser.UserName;
@@ -60,10 +60,10 @@ namespace Casgem.ApiLayer.Controllers
                 }
                 else
                 {
-                    /*foreach (var item in result.Errors)
+                    foreach (var item in result.Errors)
                     {
                         ModelState.AddModelError("", item.Description);
-                    }*/
+                    }
                     return Unauthorized();
                 }
             }
@@ -73,15 +73,16 @@ namespace Casgem.ApiLayer.Controllers
             }
             return Unauthorized();
         }
+
         /*
-        private static void SendEmail(RegisterRequest registerRequest, int x)
+        private static void SendEmail(RegisterViewModel model, int x)
         {
             #region
             MimeMessage mimeMessage = new MimeMessage();
             MailboxAddress mailboxAddress = new MailboxAddress("Admin", "huseyinaydin99@gmail.com");
             mimeMessage.From.Add(mailboxAddress);
 
-            MailboxAddress mailboxAddressTo = new MailboxAddress("User", registerRequest.Email);
+            MailboxAddress mailboxAddressTo = new MailboxAddress("User", model.Email);
             mimeMessage.To.Add(mailboxAddressTo);
 
             var bodyBuilder = new BodyBuilder();
@@ -95,6 +96,7 @@ namespace Casgem.ApiLayer.Controllers
             smtpClient.Send(mimeMessage);
             smtpClient.Disconnect(true);
             #endregion
-        }*/
+        }
+        */
     }
 }

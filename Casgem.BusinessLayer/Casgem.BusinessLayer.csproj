@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Casgem.DataAccessLayer\Casgem.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\Casgem.DtoLayer\Casgem.DtoLayer.csproj" />
   </ItemGroup>
 
 </Project>

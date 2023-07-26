@@ -19,13 +19,29 @@ namespace Casgem.ApiLayer.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginRequest request)
         {
+            LoginInfoResponse response = new LoginInfoResponse()
+            {
+                Name = null,
+                Surname = null,
+                Username = null,
+                Password = null,
+                ErrorMessage = null
+            };
             var result = await _signInManager.PasswordSignInAsync(request.Username, request.Password, true, false);
             if (result.Succeeded)
             {
+                response.Username = request.Username;
+                response.Password = request.Password;
+                HttpContext.Session.Clear();
                 HttpContext.Session.SetString("username", request.Username);
-                return Ok();
+                response.ErrorMessage = null;
+                return Ok(response);
             }
-            return Unauthorized();
+
+            response.ErrorMessage = "Kullanıcı adı veya şifre hatalı!";
+            HttpContext.Session.SetString("username", response.ErrorMessage);
+            HttpContext.Session.Clear();
+            return Unauthorized(response);
         }
     }
 }

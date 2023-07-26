@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Casgem.ApiLayer", "Casgem.ApiLayer\Casgem.ApiLayer.csproj", "{95761540-AB5C-4385-B8B0-2B8469BF7910}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Casgem.ApiLayer", "Casgem.ApiLayer\Casgem.ApiLayer.csproj", "{95761540-AB5C-4385-B8B0-2B8469BF7910}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Casgem.DataAccessLayer", "Casgem.DataAccessLayer\Casgem.DataAccessLayer.csproj", "{B241A182-DF7E-4FB9-AD0E-E9B8322BFA95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Casgem.DataAccessLayer", "Casgem.DataAccessLayer\Casgem.DataAccessLayer.csproj", "{B241A182-DF7E-4FB9-AD0E-E9B8322BFA95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Casgem.EntityLayer", "Casgem.EntityLayer\Casgem.EntityLayer.csproj", "{D2FE22EE-653C-48CB-AF45-55354FB40E89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Casgem.EntityLayer", "Casgem.EntityLayer\Casgem.EntityLayer.csproj", "{D2FE22EE-653C-48CB-AF45-55354FB40E89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Casgem.BusinessLayer", "Casgem.BusinessLayer\Casgem.BusinessLayer.csproj", "{947BA520-0C28-40DF-A4F6-BC4025129286}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Casgem.BusinessLayer", "Casgem.BusinessLayer\Casgem.BusinessLayer.csproj", "{947BA520-0C28-40DF-A4F6-BC4025129286}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Casgem.DtoLayer", "Casgem.DtoLayer\Casgem.DtoLayer.csproj", "{F1EB9ECD-4485-4FFE-9D7C-E682433FF7FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{947BA520-0C28-40DF-A4F6-BC4025129286}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{947BA520-0C28-40DF-A4F6-BC4025129286}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{947BA520-0C28-40DF-A4F6-BC4025129286}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1EB9ECD-4485-4FFE-9D7C-E682433FF7FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1EB9ECD-4485-4FFE-9D7C-E682433FF7FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1EB9ECD-4485-4FFE-9D7C-E682433FF7FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1EB9ECD-4485-4FFE-9D7C-E682433FF7FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

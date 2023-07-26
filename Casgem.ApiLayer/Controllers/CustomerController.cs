@@ -1,4 +1,6 @@
-﻿using Casgem.BusinessLayer.Abstract;
+﻿using AutoMapper;
+using Casgem.BusinessLayer.Abstract;
+using Casgem.DtoLayer.DTOs.CustomerDTOs;
 using Casgem.EntityLayer.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +12,12 @@ namespace Casgem.ApiLayer.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerService _customerService;
+        private readonly IMapper _mapper;
 
-        public CustomerController(ICustomerService customerService)
+        public CustomerController(ICustomerService customerService, IMapper mapper)
         {
             _customerService = customerService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -28,12 +32,13 @@ namespace Casgem.ApiLayer.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddCustomer(Customer customer)
+        public IActionResult AddCustomer(CreateCustomerDto dto)
         {
+            Customer entity = _mapper.Map<Customer>(dto);
             var user = HttpContext.Session.GetString("username");
             if (user != null && user != "")
             {
-                _customerService.TInsert(customer);
+                _customerService.TInsert(entity);
                 return Ok();
             }
             return Unauthorized();
@@ -65,12 +70,13 @@ namespace Casgem.ApiLayer.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateCustomer(Customer customer)
+        public IActionResult UpdateCustomer(CreateCustomerDto dto)
         {
+            Customer entity = _mapper.Map<Customer>(dto);
             var user = HttpContext.Session.GetString("username");
             if (user != null && user != "")
             {
-                _customerService.TUpdate(customer);
+                _customerService.TUpdate(entity);
                 return Ok();
             }
             return Unauthorized();
