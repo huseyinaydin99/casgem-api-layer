@@ -1,14 +1,22 @@
+using Amazon.Runtime;
 using Casgem.ApiLayer.Models;
 using Casgem.BusinessLayer.Abstract;
 using Casgem.BusinessLayer.Concrete;
+using Casgem.BusinessLayer.MongoConcrete;
 using Casgem.DataAccessLayer.Abstract;
 using Casgem.DataAccessLayer.Concrete;
 using Casgem.DataAccessLayer.EntityFramework;
 using Casgem.EntityLayer.Concrete;
+using DataAccessLayer.Abstract;
+using DataAccessLayer.Concrete;
 using EntityLayer.Settings.Abstract;
 using EntityLayer.Settings.Concrete;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using MongoDB.Driver;
+using CategoryManager = Casgem.BusinessLayer.Concrete.CategoryManager;
+using CustomerManager = Casgem.BusinessLayer.Concrete.CustomerManager;
+using ProductManager = Casgem.BusinessLayer.Concrete.ProductManager;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +40,9 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 
 // Add services to the container.
 
-
+//builder.Services.AddHttpClient();
+//builder.Services.AddHttpClient<IHttpClientFactory, HttpC>();
+builder.Services.AddHttpClient();
 
 builder.Services.AddScoped<ICategoryDal, EfCategoryDal>();
 builder.Services.AddScoped<ICategoryService, CategoryManager>();
@@ -43,17 +53,35 @@ builder.Services.AddScoped<ICustomerService, CustomerManager>();
 builder.Services.AddScoped<IProductDal, EfProductDal>();
 builder.Services.AddScoped<IProductService, ProductManager>();
 
-builder.Services.AddAutoMapper(typeof(Program));
-builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
-builder.Services.AddSingleton<IDatabaseSettings>(sp =>
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
+
+
+
+builder.Services.AddScoped<IEstateOfficeDatabaseSetting, EstateOfficeDatabaseSetting>();
+builder.Services.Configure<EstateOfficeDatabaseSetting>(builder.Configuration.GetSection("EstateOfficeDatabaseSetting"));
+builder.Services.AddSingleton<IEstateOfficeDatabaseSetting>(sp =>
 {
-    return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
+    return sp.GetRequiredService<IOptions<EstateOfficeDatabaseSetting>>().Value;
 });
+builder.Services.Configure<EstateOfficeDatabaseSetting>(
+    builder.Configuration.GetSection(nameof(EstateOfficeDatabaseSetting)));
+
+builder.Services.AddSingleton<EstateOfficeDatabaseSetting>(sp =>
+    sp.GetRequiredService<IOptions<EstateOfficeDatabaseSetting>>().Value);
+
+builder.Services.AddSingleton<IMongoClient>(s =>
+    new MongoClient(builder.Configuration.GetValue<string>("EstateOfficeDatabaseSetting:ConnectionString")));
+
+
+builder.Services.AddScoped<IMongoEstateService, EstateMongoManager>();
+builder.Services.AddScoped<IMongoEstateDal, MongoEstateDal>();
+
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Hüseyin Aydýn MongoDB Swagger Dashboard", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Selamun Aleyküm Mübarek <br />! Hüseyin Aydýn MongoDB Swagger Dashboard", Version = "v1" });
 });
 
 

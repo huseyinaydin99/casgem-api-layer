@@ -1,5 +1,5 @@
-﻿using DataAccessLayer.Abstract;
-using EntityLayer.Concrete;
+﻿using Casgem.EntityLayer.Concrete;
+using DataAccessLayer.Abstract;
 using MongoDB.Bson;
 using MongoDB.Driver;
 

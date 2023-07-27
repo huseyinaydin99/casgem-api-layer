@@ -1,5 +1,5 @@
-﻿using DataAccessLayer.Abstract;
-using EntityLayer.Concrete;
+﻿using Casgem.EntityLayer.Concrete;
+using DataAccessLayer.Abstract;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Casgem.BusinessLayer.MongoConcrete
 {
-    public class MongoManager : IMongoEstateService
+    public class EstateMongoManager : IMongoEstateService
     {
         private readonly IMongoEstateDal _mongoEstateDal;
 
-        public MongoManager(IMongoEstateDal mongoEstateDal)
+        public EstateMongoManager(IMongoEstateDal mongoEstateDal)
         {
             _mongoEstateDal = mongoEstateDal;
         }

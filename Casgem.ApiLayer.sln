@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Casgem.EntityLayer", "Casge
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Casgem.BusinessLayer", "Casgem.BusinessLayer\Casgem.BusinessLayer.csproj", "{947BA520-0C28-40DF-A4F6-BC4025129286}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Casgem.DtoLayer", "Casgem.DtoLayer\Casgem.DtoLayer.csproj", "{F1EB9ECD-4485-4FFE-9D7C-E682433FF7FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Casgem.DtoLayer", "Casgem.DtoLayer\Casgem.DtoLayer.csproj", "{F1EB9ECD-4485-4FFE-9D7C-E682433FF7FA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Casgem.ConsumeLayer", "Casgem.ConsumeLayer\Casgem.ConsumeLayer.csproj", "{7A2EBE6D-822E-49A4-91DE-4B107BEB081C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{F1EB9ECD-4485-4FFE-9D7C-E682433FF7FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1EB9ECD-4485-4FFE-9D7C-E682433FF7FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1EB9ECD-4485-4FFE-9D7C-E682433FF7FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A2EBE6D-822E-49A4-91DE-4B107BEB081C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A2EBE6D-822E-49A4-91DE-4B107BEB081C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A2EBE6D-822E-49A4-91DE-4B107BEB081C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A2EBE6D-822E-49A4-91DE-4B107BEB081C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

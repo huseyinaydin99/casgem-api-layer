@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EntityLayer.Concrete
+namespace Casgem.EntityLayer.Concrete
 {
     public class Estate
     {
