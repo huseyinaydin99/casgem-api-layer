@@ -1,0 +1,37 @@
+﻿@model Casgem.ConsumeLayer.Models.AddEstateModel;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+
+<h2>Emlak İlanı Ekleme Sayfası</h2>
+
+<form method="post">
+    <label>Başlık</label>
+    <input type="text" asp-for="Title" class="form-control border" />
+    <span asp-validation-for="Title" class="text-danger"></span>
+    <br />
+    <label>Fiyat</label>
+    <input type="text" asp-for="Price" class="form-control border" />
+    <span asp-validation-for="Price" class="text-danger"></span>
+    <br />
+    <label>Şehir</label>
+    <input type="text" asp-for="City" class="form-control border" />
+    <span asp-validation-for="City" class="text-danger"></span>
+    <br />
+    <label>Oda Sayısı</label>
+    <input type="text" asp-for="Room" class="form-control border" />
+    <span asp-validation-for="Room" class="text-danger"></span>
+    <br />
+    <label>Yapım Yılı</label>
+    <input type="text" asp-for="BuildYear" class="form-control border" />
+    <span asp-validation-for="BuildYear" class="text-danger"></span>
+    <br />
+    <label>Yayın Tipi</label>
+    <input type="text" asp-for="Type" class="form-control border" />
+    <span asp-validation-for="Type" class="text-danger"></span>
+    <br />
+    <button class="btn btn-warning">Emlak İlanı Ekle</button>
+</form>

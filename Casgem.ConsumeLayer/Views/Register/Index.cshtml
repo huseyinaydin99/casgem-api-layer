@@ -1,0 +1,30 @@
+﻿@model Casgem.ConsumeLayer.Models.AppUserModel;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_RegisterView.cshtml";
+}
+
+<h1>Kayıt Sayfası</h1>
+<form method="post">
+    <input type="hidden" value="Default_" name="City" />
+    <input type="hidden" value="12345Abcabc" name="ConfirmCode" />
+    <input type="hidden" value="abc@abc.com" name="Email" />
+    <input type="hidden" value="Default_" name="Email" />
+
+
+    <input type="text" class="text" name="Name" placeholder="Ad" required="" />
+    <input type="text" class="text" name="Surname" placeholder="Soyad" required="" />
+    <input type="text" class="text" name="UserName" placeholder="Kullanıcı Adı" required="" />
+    <input type="text" class="text w3lpass" name="Password" placeholder="Şifre" required="" />
+    <input type="text" class="text w3lpass" name="ConfirmPassword" placeholder="Şifre Tekrarı" required="" />
+    <div class="wthree-text">
+        <label class="anim">
+            <input type="checkbox" class="checkbox" required="">
+            <span>Anlaşmayı kabul ediyorum.</span>
+        </label>
+        <div class="clear"> </div>
+    </div>
+    <input type="submit" value="Kaydol" />
+
+</form>

@@ -44,34 +44,35 @@ namespace Casgem.ApiLayer.Controllers
                 City = model.City,
                 ConfirmCode = x
             };
-            if (model.Password == model.ConfirmPassword)
+
+            var result = await _userManager.CreateAsync(appUser, model.Password);
+
+            if (result.Succeeded)
             {
-                var result = await _userManager.CreateAsync(appUser, model.Password);
-                if (result.Succeeded)
+                HttpContext.Session.SetString("username", model.UserName);
+                using (StreamWriter writer = new StreamWriter("C:\\Users\\Huseyin_Aydin\\Desktop\\test_abc.txt"))
                 {
-                    HttpContext.Session.SetString("username", model.UserName);
-                    //SendEmail(registerRequest, x);
-
-                    //TempData["Username"] = appUser.UserName;
-                    //TempData["User"] = appUser;
-
-                    //return RedirectToAction("Index", "Confirm");
-                    return Ok();
+                    writer.WriteLine(result.ToString());
+                    writer.WriteLine("xxxx");
+                    writer.Flush();
+                    writer.Close();
                 }
-                else
-                {
-                    foreach (var item in result.Errors)
-                    {
-                        ModelState.AddModelError("", item.Description);
-                    }
-                    return Unauthorized();
-                }
+                //SendEmail(registerRequest, x);
+
+                //TempData["Username"] = appUser.UserName;
+                //TempData["User"] = appUser;
+
+                //return RedirectToAction("Index", "Confirm");
+                return Ok();
             }
             else
             {
-                //ModelState.AddModelError("", "Şifreler eşleşmiyor.");
+                foreach (var item in result.Errors)
+                {
+                    ModelState.AddModelError("", item.Description);
+                }
+                return Unauthorized();
             }
-            return Unauthorized();
         }
 
         /*

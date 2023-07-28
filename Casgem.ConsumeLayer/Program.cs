@@ -3,13 +3,21 @@ using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(1);//You can set Time   
+});
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
-builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 var app = builder.Build();
 
@@ -27,7 +35,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
+app.UseSession();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

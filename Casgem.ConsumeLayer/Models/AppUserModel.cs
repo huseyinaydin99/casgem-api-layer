@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
 
-namespace Casgem.DtoLayer.DTOs.RegisterDTOs
+namespace Casgem.ConsumeLayer.Models
 {
-    public class RegisterRequest : IdentityUser<int>
+    public class AppUserModel : IdentityUser<int>
     {
         public string? Name { get; set; }
         public string? Surname { get; set; }

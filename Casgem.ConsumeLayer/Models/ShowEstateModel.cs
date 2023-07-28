@@ -1,6 +1,6 @@
-﻿namespace Casgem.DtoLayer.DTOs.EstateDTOs
+﻿namespace Casgem.ConsumeLayer.Models
 {
-    public class Estate
+    public class ShowEstateModel
     {
         public string Id { get; set; }
         public string Title { get; set; }

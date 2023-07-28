@@ -1,6 +1,9 @@
-﻿namespace Casgem.DtoLayer.DTOs.EstateDTOs
+﻿using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
+
+namespace Casgem.ConsumeLayer.Models
 {
-    public class Estate
+    public class AddEstateModel
     {
         public string Id { get; set; }
         public string Title { get; set; }

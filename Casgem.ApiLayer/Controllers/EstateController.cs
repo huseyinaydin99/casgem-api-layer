@@ -7,7 +7,7 @@ using MongoDB.Bson;
 
 namespace Casgem.ApiLayer.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class EstateController : ControllerBase
     {
@@ -33,7 +33,7 @@ namespace Casgem.ApiLayer.Controllers
                 return NotFound($"Essate with Id = {id} not found");
             }
 
-            return essate;
+            return Ok(essate);
         }
 
         [HttpPost]
@@ -42,12 +42,12 @@ namespace Casgem.ApiLayer.Controllers
             estate.Id = ObjectId.GenerateNewId().ToString();
             _mongoEstateService.Create(estate);
 
-            return CreatedAtAction(nameof(Get), new { id = estate.Id }, estate);
+            return Ok(estate);
         }
 
 
         [HttpPut("{id}")]
-        public ActionResult Put(string id, [FromBody] Estate estate)
+        public ActionResult<Estate> Put(string id, [FromBody] Estate estate)
         {
             var existingEssate = _mongoEstateService.Get(id);
             if (existingEssate == null)
@@ -56,7 +56,7 @@ namespace Casgem.ApiLayer.Controllers
             }
 
             _mongoEstateService.Update(id, estate);
-            return NoContent();
+            return Ok(estate);
         }
 
         [HttpDelete("{id}")]

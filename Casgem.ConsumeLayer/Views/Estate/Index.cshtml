@@ -1,0 +1,38 @@
+﻿@model List<Casgem.ConsumeLayer.Models.ShowEstateModel>;
+@*
+
+*@
+@{
+    int count = 0;
+}
+
+<h2>Emlak İlanı Ekleme Sayfası</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Başlık</th>
+        <th>Fiyat</th>
+        <th>Şehir</th>
+        <th>Oda Sayısı</th>
+        <th>Yapım Yılı</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        count++;
+        <tr>
+            <td>@count</td>
+            <td>@item.Title</td>
+            <td>@item.Price</td>
+            <td>@item.City</td>
+            <td>@item.Room</td>
+            <td>@item.BuildYear</td>
+            <td>@item.Type</td>
+            <td><a href="/Estate/DeleteEstate/@item.Id" class="btn btn-danger">Sil</a></td>
+            <td><a href="/Estate/UpdateEstate/@item.Id" class="btn btn-warning">Güncelle</a></td>
+        </tr>
+    }
+</table>
+<a href="/Estate/AddEstate" class="btn btn-info">Emlak İlanı Ekleme Sayfası</a>
