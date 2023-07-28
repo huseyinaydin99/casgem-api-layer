@@ -10435,10 +10435,11 @@ nav ul li a:hover {
   letter-spacing: 0; }
 
 .w3l-cover-3 .w3l-cover-3-gd {
-  display: flex;
-  flex-wrap: wrap;
+  display: flow;
+  flex-wrap: revert;
   max-width: 850px;
-  margin: auto; }
+  margin: auto;
+}
 
 .w3l-cover-3 .most-searches {
   text-align: left;

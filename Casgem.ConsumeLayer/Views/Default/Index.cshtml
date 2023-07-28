@@ -1,12 +1,9 @@
 ﻿@model List<Casgem.DtoLayer.DTOs.EstateDTOs.Estate>
 @{
     Layout = null;
+    int count = 0;
 }
 
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
--->
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,15 +11,14 @@ Author URL: http://w3layouts.com
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Estate sale - Real Estate Category Bootstrap Responsive Website Template - Home : W3layouts</title>
+    <title>Aydın Emlak</title>
 
     <!-- google fonts -->
     <link href="//fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap" rel="stylesheet">
 
     <!-- Template CSS -->
-    <link rel="stylesheet" href="~/starter/assets/css/style-starter.css">
+    <link rel="stylesheet" href="~/estate_template/assets/css/style-starter.css">
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-
 </head>
 <body>
 
@@ -32,7 +28,7 @@ Author URL: http://w3layouts.com
             <nav class="navbar navbar-expand-lg stroke px-0">
                 <h1>
                     <a class="navbar-brand" href="index.html">
-                        <span class="fa fa-home"></span> Estate sale
+                        <span class="fa fa-home"></span> Aydın Emlak
                     </a>
                 </h1>
                 <!-- if logo is image enable this
@@ -49,15 +45,17 @@ Author URL: http://w3layouts.com
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul class="navbar-nav ml-lg-5 mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/Default/Index">Ana Sayfa <span class="sr-only">(current)</span></a>
                         </li>
+
                         <li class="nav-item @@listing__active">
-                            <a class="nav-link" href="listing.html">Listing</a>
+                            <a class="nav-link" href="/Default/Result">Test1</a>
                         </li>
+
                         <li class="nav-item dropdown @@property__active">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Property <span class="fa fa-angle-down"></span>
+                                Test2 <span class="fa fa-angle-down"></span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item @@ps__active" href="property-single.html">Single property</a>
@@ -66,18 +64,17 @@ Author URL: http://w3layouts.com
                         <li class="nav-item dropdown @@pages__active">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Pages <span class="fa fa-angle-down"></span>
+                                Test3 <span class="fa fa-angle-down"></span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item @@about__active" href="about.html">About us</a>
-                                <a class="dropdown-item @@contact__active" href="contact.html">Contact us</a>
+                                <a class="dropdown-item @@about__active" href="about.html">Test4</a>
+                                <a class="dropdown-item @@contact__active" href="contact.html">Test5</a>
                             </div>
                         </li>
                     </ul>
                     <div class="top-quote mt-lg-0">
-                        <a href="#buytheme" class="btn btn-style btn-primary">
-                            <span class="fa fa-home"></span> Add
-                            listiing
+                        <a href="#buytheme" class="btn btn-style btn-danger">
+                            <span class="fa fa-home"></span> Listeye Ekle
                         </a>
                     </div>
                     <!--/search-right-->
@@ -85,8 +82,8 @@ Author URL: http://w3layouts.com
                         <input class="search_box" type="checkbox" id="search_box">
                         <label class="fa fa-search" for="search_box"></label>
                         <div class="search_form">
-                            <form action="error.html" method="GET">
-                                <input type="text" placeholder="Search"><input type="submit" value="search">
+                            <form method="GET">
+                                <input type="text" name="searchForEverything" placeholder="Search"><input type="submit" value="Ara">
                             </form>
                         </div>
                     </div>
@@ -117,20 +114,26 @@ Author URL: http://w3layouts.com
         <div class="cover top-bottom">
             <div class="container">
                 <div class="middle-section text-center">
-                    <div class="section-width">
-                        <p>CASGEM</p>
-                        <h2>MongoDb Projesi</h2>
+                    <div class="">
+                        <p>ÇASGEM Emlak MongoDB ile Proje Demosu</p>
+                        <h2>Dilerseniz Arama Yapın:</h2>
+                        <!--
                         <div class="most-searches">
                         </div>
-                        <form  class="w3l-cover-3-gd">
-                            <input type="text" placeholder="Genel Arama" name="p" >
-                            <input type="text" placeholder="Fiyata Göre Arama" name="price" >
-                            <input type="text" placeholder="Oda Sayısı" name="room" >
-                            <button type="submit" class="btn-primary" >Search</button>
+                        -->
+                        <form class="w3l-cover-3-gd">
+                            <input type="text" class="form-control" placeholder="Tüm Özelliklere Göre Arama" name="searchForEverything" />
+                            <span class="input-group-addon">-</span>
+                            <input type="text" class="form-control-2" placeholder="Fiyat Araması" name="price" />
+                            <span class="input-group-addon">-</span>
+                            <input type="text" class="form-control-2" placeholder="Oda Sayısı Araması" name="room" />
+                            <span class="input-group-addon">-</span>
+                            
+                            <button type="submit" class="btn btn-info"> Ara</button>
                         </form>
                     </div>
                     <section id="bottom" class="demo">
-                        <a href="#bottom"><span></span>Scroll</a>
+                        <a href="#bottom"><span></span>Aşağı Kaydır</a>
                     </section>
                 </div>
             </div>
@@ -142,18 +145,23 @@ Author URL: http://w3layouts.com
         <div class="locations py-5">
             <div class="container py-lg-5 py-md-4 py-2">
                 <div class="heading text-center mx-auto">
-                    <h3 class="title-big">Top Properties</h3>
+                    <h3 class="title-big">Emlak Sonuçları / Kayıtları: </h3>
                 </div>
                 <div class="row pt-md-5 pt-4">
                     @foreach (var item in Model)
                     {
+                        count++;
                         <div class="col-lg-4 col-md-6 mt-4 pt-md-2">
                             <a href="/Default/Get/@item.Id">
                                 <div class="box16">
-                                    <div class="rentext-listing-category"><span>@item.Type</span><span>Oda Sayısı : @item.Room</span><span>Yıl : @item.BuildYear</span></div>
-                                    <img class="img-fluid" src="~/starter/assets/images/p1.jpg" alt="">
+                                    <div class="rentext-listing-category">
+                                        <span>@item.Type</span>
+                                        <span>Oda Sayısı : @item.Room</span>
+                                        <span>Yıl : @item.BuildYear</span>
+                                    </div>
+                                    <img class="img-fluid" src="~/estate_template/assets/images/@string.Concat("p"+count, ".jpg")" alt="">
                                     <div class="box-content">
-                                        <h3 class="title">@item.Price.ToString("#,#") €</h3>
+                                        <h3 class="title">@item.Price.ToString("#,#") ₺</h3>
                                         <span class="post">@item.City</span>
                                     </div>
                                 </div>
@@ -173,45 +181,47 @@ Author URL: http://w3layouts.com
                     <div class="d-grid grid-col-4 grids-content">
                         <div class="column">
                             <a href="#url" class="link"><span class="fa fa-comments"></span></a>
-                            <a href="#url" class="title-small">Free consultation</a>
-                            <h4>Schedule a free consultation with our specialist.</h4>
+                            <a href="#url" class="title-small">
+                                Ücretsiz danışmanlık
+                            </a>
+                            <h4>Uzmanımızla ücretsiz danışmanlık randevusu alın.</h4>
                             <a href="#buytheme" class="btn btn-style btn-primary">
-                                Schedule now
+                                Şimdi planla
                                 <span class="fa fa-long-arrow-right ml-2"></span>
                             </a>
                         </div>
                         <div class="column">
                             <a href="#url" class="link"><span class="fa fa-phone"></span></a>
-                            <a href="#url" class="title-small">help desk</a>
-                            <h4>Do you have questions or want more infomation? Call Now</h4>
-                            <a href="tel:+1-2345-678-11">
+                            <a href="#url" class="title-small">Destek</a>
+                            <h4>Daha fazla bilgi mi istiyorsunuz? </h4>
+                            <a href="tel:+9005333333333">
                                 <p class="contact-phone mt-2">
-                                    <span class="lnr lnr-phone-handset"></span> +1-2345-678-11
+                                    <span class="lnr lnr-phone-handset"></span> +9005333333333
                                 </p>
                             </a>
                         </div>
                         <div class="column mt-lg-0 mt-md-5">
-                            <h4 class="mb-1">Signup for newsletter</h4>
-                            <p>and get latest news and updates</p>
+                            <h4 class="mb-1">Bülten İçin Kaydolun</h4>
+                            <p>ve yeniliklerden haberdar olun.</p>
                             <form action="#" class="subscribe-form mt-4" method="post">
                                 <div class="form-group">
-                                    <input type="email" name="subscribe" placeholder="Enter your email" required="">
-                                    <button class="btn btn-style btn-primary">Subscribe</button>
+                                    <input type="email" name="subscribe" placeholder="E-posta adresinizi giriniz" required="">
+                                    <button class="btn btn-style btn-primary">Abone Ol</button>
                                 </div>
                             </form>
                             <ul class="footers-17_social">
-                                <h4 class="d-inline mr-4">Follow us</h4>
+                                <h4 class="d-inline mr-4">Takip Edin</h4>
                                 <li><a href="#url" class="twitter"><span class="fa fa-twitter"></span></a></li>
-                                <li><a href="#url" class="facebook"><span class="fa fa-facebook"></span></a></li>
-                                <li><a href="#url" class="linkedin"><span class="fa fa-linkedin"></span></a></li>
-                                <li><a href="#url" class="instagram"><span class="fa fa-instagram"></span></a></li>
+                                <li><a href="https://www.facebook.com/beyaz.sapkali.5" class="facebook"><span class="fa fa-facebook"></span></a></li>
+                                <li><a href="https://www.linkedin.com/in/huseyin99" class="linkedin"><span class="fa fa-linkedin"></span></a></li>
+                                <li><a href="https://www.instagram.com/huseyin.aydin.99" class="instagram"><span class="fa fa-instagram"></span></a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="d-grid grid-col-3 grids-content1 bottom-border">
                         <div class="columns copyright-grid align-self">
                             <p class="copy-footer-29">
-                                © 2020 Estate sale. All rights reserved | Designed by <a href="https://w3layouts.com">W3layouts</a>
+                                © 2023 Aydın Emlak. Tüm hakları saklıdır. | Bu proje <a href="https://www.github.com/huseyinaydin99">Hüseyin Aydın</a> tarafından yapılmıştır.
                             </p>
                         </div>
                     </div>
@@ -247,16 +257,16 @@ Author URL: http://w3layouts.com
 
     <!-- jQuery and Bootstrap JS -->
 
-    <script src="~/starter/assets/js/theme-change.js"></script><!-- theme switch js (light and dark)-->
+    <script src="~/estate_template/assets/js/theme-change.js"></script><!-- theme switch js (light and dark)-->
     <!-- stats number counter-->
-    <script src="~/starter/assets/js/jquery.waypoints.min.js"></script>
-    <script src="~/starter/assets/js/jquery.countup.js"></script>
+    <script src="~/estate_template/assets/js/jquery.waypoints.min.js"></script>
+    <script src="~/estate_template/assets/js/jquery.countup.js"></script>
     <script>
         $('.counter').countUp();
     </script>
     <!-- //stats number counter -->
     <!-- owlcarousel -->
-    <script src="~/starter/assets/js/owl.carousel.js"></script>
+    <script src="~/estate_template/assets/js/owl.carousel.js"></script>
     <!-- script for blog post slider -->
     <script>
         $(document).ready(function () {
@@ -314,7 +324,7 @@ Author URL: http://w3layouts.com
     </script>
     <!-- //script for tesimonials carousel slider -->
 
-    <script src="~/starter/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/estate_template/assets/js/jquery.magnific-popup.min.js"></script>
     <script>
         $(document).ready(function () {
             $('.popup-with-zoom-anim').magnificPopup({
@@ -387,22 +397,8 @@ Author URL: http://w3layouts.com
             });
         });
     </script>
-
-
-
     <!-- //MENU-JS -->
     <!-- bootstrap -->
-    <script src="~/starter/assets/js/bootstrap.min.js"></script>
-
-
-
-    
-
-
-
-
-
-
+    <script src="~/estate_template/assets/js/bootstrap.min.js"></script>
 </body>
-
 </html>
