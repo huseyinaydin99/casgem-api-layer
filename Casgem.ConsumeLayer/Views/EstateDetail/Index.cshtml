@@ -1,0 +1,56 @@
+﻿@model Casgem.ConsumeLayer.Models.ShowEstateModel;
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_EstateDetailLayout.cshtml";
+}
+
+<div class="single-post-image mb-5">
+    <div class="owl-blog owl-carousel owl-theme">
+        <div class="item">
+            <div class="card">
+                <img src="~/estate_template/assets/images/@Model.ImageUrl" class="img-fluid radius-image" alt="image">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="single-post-content">
+    <h3 class="post-content-title mb-3">Açıklama</h3>
+    <p class="mb-4">
+        
+    </p>
+    <p class="mb-4">
+        Tüm ayrıntıları aşağıda görebilirsiniz: 
+    </p>
+    <div class="single-bg-white">
+        <h3 class="post-content-title mb-4">Property detail</h3>
+        <ul class="details-list">
+            <li><strong>İlan Id :</strong> @Model.Id</li>
+            <li><strong>İlan başlığı :</strong> @Model.Title</li>
+            <li><strong>Fiyatı :</strong> @Model.Price </li>
+            <li><strong>Şehir :</strong> @Model.City </li>
+            <li><strong>Oda Sayısı :</strong> @Model.Room </li>
+            <li><strong>Yapılış Tarihi :</strong> @Model.BuildYear</li>
+            <li><strong>İlan tipi :</strong> @Model.Type</li>
+        </ul>
+    </div>
+</div>
+
+<div class="single-bg-white">
+    <h3 class="post-content-title mb-4">Location</h3>
+    <div class="agent-map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3055.6325973074336!2d34.673049080378966!3d37.973176274830905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1529e70e090f3f3d%3A0xacbbe44bbc9b5dfc!2zxZ5laGl0IEouVXptLsOHdsWfIMOWemthbiDDlnp0w7xyayBQYXJrxLE!5e0!3m2!1str!2str!4v1690620575072!5m2!1str!2str"
+                frameborder="0" style="border:0" allowfullscreen=""></iframe>
+    </div>
+</div>
+
+<div class="single-bg-white mb-0">
+    <h3 class="post-content-title mb-4">Tanıtım videosu</h3>
+    <div class="post-content">
+        <iframe src="https://www.youtube.com/embed/jqP3m3ElcxA" frameborder="0"
+                allowfullscreen=""></iframe>
+    </div>
+</div>

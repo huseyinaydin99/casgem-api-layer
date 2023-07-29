@@ -14,7 +14,7 @@ namespace Casgem.DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source = DESKTOP-13123BI; initial catalog = CasgemApiDb; integrated security = true;");
+            optionsBuilder.UseSqlServer("Data Source = DESKTOP-13123BI; initial catalog = CasgemApiEstateDb; integrated security = true;");
         }
 
         public DbSet<Product> Products { get; set; }

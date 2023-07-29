@@ -24,17 +24,20 @@ namespace Casgem.ConsumeLayer.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7160/api/Estate/Get");
-
-            if (responseMessage.IsSuccessStatusCode)
+            var user = HttpContext.Session.GetString("username");
+            if (!string.IsNullOrEmpty(user))
             {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ShowEstateModel>>(jsonData);
-                //var modelList = _mapper.Map<List<ShowEstateModel>>(values);
-                return View(values);
-            }
+                var client = _httpClientFactory.CreateClient();
+                var responseMessage = await client.GetAsync("https://localhost:7160/api/Estate/");
 
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                    var values = JsonConvert.DeserializeObject<List<ShowEstateModel>>(jsonData);
+                    //var modelList = _mapper.Map<List<ShowEstateModel>>(values);
+                    return View(values);
+                }
+            }
             return View();
         }
 
@@ -48,26 +51,28 @@ namespace Casgem.ConsumeLayer.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateEstate(string id)
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"https://localhost:7160/api/Estate/{id}");
-            using (StreamWriter writer = new StreamWriter("C:\\Users\\Huseyin_Aydin\\Desktop\\textt_abc.txt"))
+            var user = HttpContext.Session.GetString("username");
+            if (!string.IsNullOrEmpty(user))
             {
-                writer.WriteLine(responseMessage.StatusCode);
-                writer.WriteLine("abcabcxxxx");
-                writer.Flush();
-                writer.Close();
-            }
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<UpdateEstateModel>(jsonData);
-                
-                //var modelList = _mapper.Map<List<ShowEstateModel>>(values);
-                return View(values);
-            }
-            
+                var client = _httpClientFactory.CreateClient();
+                var responseMessage = await client.GetAsync($"https://localhost:7160/api/Estate/{id}");
+                using (StreamWriter writer = new StreamWriter("C:\\Users\\Huseyin_Aydin\\Desktop\\textt_abc.txt"))
+                {
+                    writer.WriteLine(responseMessage.StatusCode);
+                    writer.WriteLine("abcabcxxxx");
+                    writer.Flush();
+                    writer.Close();
+                }
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                    var values = JsonConvert.DeserializeObject<UpdateEstateModel>(jsonData);
 
-            return View();
+                    //var modelList = _mapper.Map<List<ShowEstateModel>>(values);
+                    return View(values);
+                }
+            }
+            return RedirectToAction("Index","Default");
         }
 
         [HttpPost]
@@ -76,7 +81,7 @@ namespace Casgem.ConsumeLayer.Controllers
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(model);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PutAsync($"https://localhost:7160/api/Estate/Update/{model.Id}", stringContent);
+            var responseMessage = await client.PutAsync($"https://localhost:7160/api/Estate/{model.Id}", stringContent);
 
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -103,7 +108,7 @@ namespace Casgem.ConsumeLayer.Controllers
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(model);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.DeleteAsync($"https://localhost:7160/api/Estate/Delete/{model.Id}");
+            var responseMessage = await client.DeleteAsync($"https://localhost:7160/api/Estate/{model.Id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 /*
@@ -126,7 +131,12 @@ namespace Casgem.ConsumeLayer.Controllers
         [HttpGet]
         public async Task<IActionResult> AddEstate()
         {
-            return View();
+            var user = HttpContext.Session.GetString("username");
+            if (!string.IsNullOrEmpty(user))
+            {
+                return View();
+            }
+            return RedirectToAction("Index","Default");
         }
 
         [HttpPost]
@@ -137,7 +147,7 @@ namespace Casgem.ConsumeLayer.Controllers
             var jsonData = JsonConvert.SerializeObject(estate);
 
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7160/api/Estate/Post", stringContent);
+            var responseMessage = await client.PostAsync("https://localhost:7160/api/Estate/", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 /*var responseJsonData = await responseMessage.Content.ReadAsStringAsync();

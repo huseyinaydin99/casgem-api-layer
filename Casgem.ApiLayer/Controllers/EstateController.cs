@@ -7,7 +7,7 @@ using MongoDB.Bson;
 
 namespace Casgem.ApiLayer.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]/")]
     [ApiController]
     public class EstateController : ControllerBase
     {
@@ -37,17 +37,17 @@ namespace Casgem.ApiLayer.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Estate> Post([FromBody] Estate estate)
+        public ActionResult<Estate> Post(Estate estate)
         {
             estate.Id = ObjectId.GenerateNewId().ToString();
             _mongoEstateService.Create(estate);
 
-            return Ok(estate);
+            return Ok();
         }
 
 
         [HttpPut("{id}")]
-        public ActionResult<Estate> Put(string id, [FromBody] Estate estate)
+        public ActionResult<Estate> Put(string id, Estate estate)
         {
             var existingEssate = _mongoEstateService.Get(id);
             if (existingEssate == null)
@@ -88,8 +88,8 @@ namespace Casgem.ApiLayer.Controllers
 
 
         [HttpGet("filter")]
-        public ActionResult<List<Estate>> GetByFilter([FromQuery] string? city = null, [FromQuery] string? type = null,
-            [FromQuery] int? room = null, [FromQuery] string? title = null, [FromQuery] int? price = null, [FromQuery] string? buildYear = null)
+        public ActionResult<List<Estate>> GetByFilter( string? city = null,  string? type = null,
+            int? room = null, string? title = null, int? price = null, string? buildYear = null)
         {
             var estate = _mongoEstateService.GetByFilter(city, type, room, title, price, buildYear);
 

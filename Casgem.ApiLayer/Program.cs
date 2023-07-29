@@ -81,7 +81,7 @@ builder.Services.AddScoped<IMongoEstateDal, MongoEstateDal>();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Selamun Aleyküm Mübarek <br />! Hüseyin Aydýn MongoDB Swagger Dashboard", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Selamun Aleyküm. | Hüseyin Aydýn MongoDB Swagger Dashboard", Version = "v1" });
 });
 
 

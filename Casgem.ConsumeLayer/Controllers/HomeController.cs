@@ -15,18 +15,18 @@ namespace Casgem.ConsumeLayer.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index","Default");
         }
 
         public IActionResult Privacy()
         {
-            return View();
+            return RedirectToAction("Index", "Default");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return RedirectToAction("Index", "Default");
         }
     }
 }

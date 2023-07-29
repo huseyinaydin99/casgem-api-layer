@@ -61,7 +61,7 @@ namespace Casgem.ConsumeLayer.Controllers
                 {
                     writer.WriteLine("Register başarılı. Model Tamam!");
                 }**/
-                return RedirectToAction("Index", "Default");
+                return RedirectToAction("Index", "Estate");
             }
             appUserModel.Name = null;
             appUserModel.Surname = null;

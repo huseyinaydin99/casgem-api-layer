@@ -49,7 +49,7 @@ namespace Casgem.ConsumeLayer.Controllers
                 model.Password = values.Password;
                 ViewBag.model = model;
                 //return View(model);
-                return RedirectToAction("Index", "Category");
+                return RedirectToAction("Index", "Estate");
             }
             model.Name = null;
             model.Surname = null;

@@ -125,7 +125,7 @@
                         </div>
                         -->
                         <form class="w3l-cover-3-gd">
-                            <input type="text" class="mt-4 mb-1 form-control" placeholder="Tüm Özelliklere Göre Arama" name="searchForEverything" />
+                            <input type="text" class="mt-4 mb-1 form-control" placeholder="Tüm Özelliklere Göre Arama / Şehir / Başlık / İlan Tipi" name="searchForEverything" />
                             <input type="text" class="mb-1 form-control" placeholder="Fiyat Araması" name="price" />
                             <input type="text" class="mb-3 form-control" placeholder="Oda Sayısı Araması" name="room" />
                             <button type="submit" class="btn btn-info btn-lg"> Ara</button>
@@ -146,26 +146,29 @@
                 <div class="heading text-center mx-auto">
                     <h3 class="title-big">Emlak Sonuçları / Kayıtları: </h3>
                 </div>
-                <div class="row pt-md-5 pt-4">
+                <div class="row pt-md-2 pt-1">
                     @foreach (var item in Model)
                     {
                         count++;
-                        <div class="col-lg-4 col-md-6 mt-4 pt-md-2">
-                            <a href="/Default/Get/@item.Id">
-                                <div class="box16">
-                                    <div class="rentext-listing-category">
-                                        <span>@item.Type</span>
-                                        <span>Oda Sayısı : @item.Room</span>
-                                        <span>Yıl : @item.BuildYear</span>
-                                    </div>
-                                    <img class="img-fluid" src="~/estate_template/assets/images/@string.Concat("p"+count, ".jpg")" alt="">
-                                    <div class="box-content">
-                                        <h3 class="title">@item.Price.ToString("#,#") ₺</h3>
-                                        <span class="post">@item.City</span>
-                                    </div>
+                        string val = "p" + count + ".jpg";
+                        <form action="/EstateDetail/Index/" method="get">
+                            <input type="hidden" name="Id" value="@item.Id">
+                            <input type="hidden" name="imageUrl" value="@val">
+                            
+                            <div class="box16">
+                                <div class="rentext-listing-category">
+                                    <span>@item.Type</span>
+                                    <span>Oda Sayısı : @item.Room</span>
+                                    <span>Yıl : @item.BuildYear</span>
                                 </div>
-                            </a>
-                        </div>
+                                <img class="img-fluid" height="40px" src="~/estate_template/assets/images/@string.Concat("p"+count, ".jpg")" alt="">
+                                <div class="box-content">
+                                    <h3 class="title">@item.Price.ToString("#,#") ₺</h3>
+                                    <span class="post">@item.City</span>
+                                    <span class="post"><button class="btn btn-primary" >Detayı Gör</button></span>
+                                </div>
+                            </div>
+                        </form>
                     }
                 </div>
             </div>
